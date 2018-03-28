@@ -22,12 +22,13 @@ class AvatarCommand extends Command {
 
   async run(message, { user }) {
     await message.delete();
-
+    const avatar = user.avatarURL({ format: 'png' });
+    
     const embed = new MessageEmbed()
       .setColor(this.client.options.embedColor)
       .setTitle(`${user.username}'s Avatar`)
-      .setDescription(`[Download](${user.avatarURL()})`)
-      .setImage(user.avatarURL());
+      .setDescription(`[Download](${avatar})`)
+      .setImage(avatar);
 
     return message.channel.send(embed);
   }
